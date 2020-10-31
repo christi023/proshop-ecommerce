@@ -1,8 +1,12 @@
 import express, { urlencoded, json } from 'express';
 import products from './data/products.js';
+import connectDB from './config/db.js';
 import dotenv from 'dotenv';
 // load env var
 dotenv.config();
+
+// connecting database
+connectDB();
 
 const app = express();
 
