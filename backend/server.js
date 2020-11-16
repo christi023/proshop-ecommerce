@@ -2,7 +2,9 @@ import express, { urlencoded, json } from 'express';
 import colors from 'colors';
 import connectDB from './config/db.js';
 import dotenv from 'dotenv';
+//routes
 import productRoutes from './routes/productRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 // middleware
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 // load env var
@@ -13,9 +15,10 @@ connectDB();
 
 const app = express();
 
+app.use(express.json());
 // express body parser adding middleware
 app.use(urlencoded({ extended: true }));
-app.use(json());
+//app.use(json());
 
 // routes
 app.get('/', (req, res) => {
@@ -23,6 +26,8 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/products', productRoutes);
+app.use('/api/users', userRoutes);
+
 // error middleware
 app.use(notFound);
 app.use(errorHandler);
